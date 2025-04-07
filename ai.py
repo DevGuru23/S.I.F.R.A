@@ -1,8 +1,8 @@
-import pyttsx3
+#import pyttsx3
 import datetime
 import speech_recognition as sr
 import wikipedia
-#import os
+import os
 #import time
 #from playsound import playsound
 #from bs4 import BeautifulSoup
@@ -13,13 +13,17 @@ import wikipedia
 soup = BeautifulSoup(html_content, 'html.parser')
 """
 # Initialize text-to-speech engine
-engine = pyttsx3.init('espeak')
+"""engine = pyttsx3.init('espeak')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)  # Uses the first available voice
 
 def speak(audio):
     engine.say(audio)
-    engine.runAndWait()
+    engine.runAndWait()"""
+
+def speak(text):
+    text = text.replace('"', '')
+    os.system(f'pico2wave -w=/tmp/speech.wav \"{text}\" && aplay /tmp/speech.wav && rm /tmp/speech.wav')
 
 def wishme():
     hour = int(datetime.datetime.now().hour)
